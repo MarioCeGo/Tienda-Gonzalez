@@ -116,4 +116,9 @@ a {
   color: white;
   border-radius: 15px;
   border: none;
+  margin: 5px;
   background-color: #0071e3; }
+  .btn-buy-secundary {
+    background-color: white;
+    border: 1px solid #0071e3;
+    color: black; }

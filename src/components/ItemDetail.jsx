@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react"
+import { Link } from "react-router-dom";
 import ItemCount from "./ItemCount"
 
 const ItemDetail = ({ prod, setCarrito, carrito }) => {
@@ -24,15 +25,23 @@ const ItemDetail = ({ prod, setCarrito, carrito }) => {
                 <span className="price">${prod.price}</span>
                 {/* <span>Unidades: {prod.stock}</span> */}
                 <span>{prod.stock ? "Unidades: " + prod.stock : "No hay stock disponible"}</span>
-                <ItemCount stock={prod.stock} lote={lote} onAdd={onAdd}/>
-                <button className="btn-buy" onClick={()=>{
-                    console.log(lote)
-                    setCarrito([...carrito, prod]);
-                        console.log(carrito);
-                    
-                }}>Comprar</button>
+                <ItemCount stock={prod.stock} lote={lote} onAdd={onAdd} />
+                <div>
+
+                    <Link to={"/cart"}><button className="btn-buy">Comprar ahora</button></Link>
+                    <button className="btn-buy btn-buy-secundary" onClick={() => {
+                        if (prod.stock) {
+                            console.log(lote)
+                            setCarrito([...carrito, prod]);
+                            console.log(carrito);
+                        }else{
+                            alert("No hay nada que agregar")
+                        }
+
+                    }}>Agregar al carrito</button>
+                </div>
             </div>
-            
+
         </div>
     )
 }

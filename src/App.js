@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import ItemListContainer from './container/ItemListContainer';
 import ItemDetailContainer from './container/ItemDetailContainer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import CartContainer from './container/CartContainer';
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
                     <Route path='/category/mac' element={<ItemListContainer prods={mac} />} />
                     <Route path='/category/iphone' element={<ItemListContainer prods={iphone} />} />
                     <Route path='/category/:type/:productoID' element={<ItemDetailContainer setCarrito={setCarrito} carrito={carrito} />} />
+                    <Route path='/cart' element={<CartContainer/>} />
                 </Routes>
             </BrowserRouter>
             <header className="App-header">
