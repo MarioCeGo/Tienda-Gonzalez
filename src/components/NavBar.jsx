@@ -1,6 +1,11 @@
+import { useContext } from "react"
 import { Link } from "react-router-dom"
+import { CartContext } from "../contexts/CartContext"
 
-const NavBar = ({carrito}) => {
+
+const NavBar = () => {
+    const cartCTX = useContext(CartContext)
+
     return (
         <div className="container-nav">
             <nav className="nav-principal">
@@ -9,7 +14,7 @@ const NavBar = ({carrito}) => {
                 <Link to={`/category/mac`}>MacBook</Link>
                 <div className="container-cart">
                     <img src="/img/cart.png" alt="cart.png" />
-                    <span>{carrito.length>0 ? carrito.length : "" }</span>
+                    <span>{cartCTX.cart.length>0 ? cartCTX.cart.length : "" }</span>
                 </div>
             </nav>
         </div>

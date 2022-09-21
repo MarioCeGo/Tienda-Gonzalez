@@ -1,14 +1,16 @@
 import './App.css';
 import NavBar from './components/NavBar';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import ItemListContainer from './container/ItemListContainer';
 import ItemDetailContainer from './container/ItemDetailContainer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CartContainer from './container/CartContainer';
 
+import {CartProvider} from './contexts/CartContext';
+
 
 function App() {
-    const [carrito, setCarrito] = useState([]);
+    
     const [prods, setProds] = useState([]);
     const [mac, setMac] = useState([]);
     const [iphone, setIphone] = useState([]);
@@ -32,21 +34,27 @@ function App() {
         }, 2000);
     }, []);
 
+
     return (
+
         <div className="App">
-            <BrowserRouter>
-                <NavBar carrito={carrito} />
-                <Routes>
-                    <Route path='/' element={<ItemListContainer prods={prods} />} />
-                    <Route path='/category/mac' element={<ItemListContainer prods={mac} />} />
-                    <Route path='/category/iphone' element={<ItemListContainer prods={iphone} />} />
-                    <Route path='/category/:type/:productoID' element={<ItemDetailContainer setCarrito={setCarrito} carrito={carrito} />} />
-                    <Route path='/cart' element={<CartContainer/>} />
-                </Routes>
-            </BrowserRouter>
+            <CartProvider>
+                <BrowserRouter>
+                    <NavBar />
+                    <Routes>
+                        <Route path='/' element={<ItemListContainer prods={prods} />} />
+                        <Route path='/category/mac' element={<ItemListContainer prods={mac} />} />
+                        <Route path='/category/iphone' element={<ItemListContainer prods={iphone} />} />
+                        <Route path='/category/:type/:productoID' element={<ItemDetailContainer />} />
+                        <Route path='/cart' element={<CartContainer />} />
+                    </Routes>
+                </BrowserRouter>
+            </CartProvider>
+
             <header className="App-header">
             </header>
         </div>
+
     );
 }
 

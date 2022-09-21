@@ -1,6 +1,7 @@
 import ItemDetail from "../components/ItemDetail"
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
+import Loading from "../components/Loading";
 
 const ItemDetailContainer = ({setCarrito, carrito}) => {
 
@@ -21,7 +22,7 @@ const ItemDetailContainer = ({setCarrito, carrito}) => {
 
     return (
         <div>
-            <ItemDetail prod={item} setCarrito={setCarrito} carrito={carrito}/>
+            {item.length == 0 ? <Loading/> : <ItemDetail prod={item} setCarrito={setCarrito} carrito={carrito}/>}
         </div>
     );
 }
