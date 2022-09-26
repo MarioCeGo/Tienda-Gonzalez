@@ -49,9 +49,12 @@ const CartProvider = ({ children }) => {
         // }
     }
 
-    const removeProd = (id) => {
+    const removeItem = (id) => {
         cart.splice(cart.indexOf(cart.find(elem => elem.prod.id === id)), 1);
         getTotal();
+    }
+    const isInCart = (id) => {
+        cart.find(elem => elem.prod.id === id ? true : false );
     }
 
     const clearCart = () => {
@@ -65,7 +68,7 @@ const CartProvider = ({ children }) => {
         setTotal(aux);
     }
     return (
-        <CartContext.Provider value={{ cart, quantity, total, addItem, clearCart, setTotal, getTotal, removeProd, checkQuantity }}>
+        <CartContext.Provider value={{ cart, quantity, total, addItem, clearCart, setTotal, getTotal, removeItem, checkQuantity }}>
             {children}
         </CartContext.Provider>
     )

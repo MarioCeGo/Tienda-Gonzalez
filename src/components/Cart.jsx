@@ -18,7 +18,7 @@ const Cart = ({ prod, lote }) => {
         cartCTX.getTotal();
     }
     const removeProdList = (e)=>{
-        cartCTX.removeProd(e.target.value);
+        cartCTX.removeItem(e.target.value);
         cartCTX.checkQuantity();
     }
     return (
