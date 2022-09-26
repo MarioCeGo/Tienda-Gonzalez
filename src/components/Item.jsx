@@ -7,10 +7,10 @@ const Item = ({ prod}) => {
             <h3>{prod.title}</h3>
             <img src={prod.img} alt="" />
             {/* <span>Disponibles: {prod.stock}</span> */}
-            <span>{prod.stock ? "Disponibles: " + prod.stock : "No hay stock"}</span>
+            <span>{prod.stock ? "Available: " + prod.stock : "Not available"}</span>
             <p>${prod.price}</p>
             <Link to={`/category/${prod.type}/${prod.id}`}>
-                <button>Más info</button>
+                <button>More info</button>
             </Link>
 
         </div>
