@@ -24,11 +24,7 @@ const ItemDetail = ({ prod }) => {
 
                 {prod.color.map(elem => <p key={elem}>{elem}</p>)}
 
-                {/* {prod.storage.map((elem)=>{
-                    typeof(elem) == "String" ? <span>{elem}</span> : console.log(elem)
-                })} */}
-                {/* <span>{prod.storage}</span> */}
-                {prod.storage.map(elem => typeof (elem) === 'string' ? <p key={elem}>{elem}</p> : "")}
+                {prod.type === 'watch' ? "": prod.storage.map(elem => typeof (elem) === 'string' ? <p key={elem}>{elem}</p> : "")}
 
                 <span className="price">${prod.price * lote}</span>
 

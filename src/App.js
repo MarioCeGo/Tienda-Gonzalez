@@ -1,36 +1,35 @@
 import './App.css';
 import NavBar from './components/NavBar';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import ItemListContainer from './container/ItemListContainer';
 import ItemDetailContainer from './container/ItemDetailContainer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CartContainer from './container/CartContainer';
-
-import {CartProvider} from './contexts/CartContext';
+import { getFirestore, collection, getDocs } from 'firebase/firestore'
+import { CartProvider } from './contexts/CartContext';
+import Loading from './components/Loading';
 
 
 function App() {
-    
+
     const [prods, setProds] = useState([]);
     const [mac, setMac] = useState([]);
     const [iphone, setIphone] = useState([]);
-
-    const setProductos = async () => {
-        const resp = await fetch(`https://631c95741b470e0e1205982c.mockapi.io/producto/1/iphone`);
-        const data = await resp.json();
-        setIphone(data);
-
-        const resp2 = await fetch(`https://631c95741b470e0e1205982c.mockapi.io/producto/1/mac`);
-        const data2 = await resp2.json();
-        setMac(data2);
-
-        setProds([...data, ...data2]);
-    }
+    const [watch, setWatch] = useState([]);
 
     useEffect(() => {
         setTimeout(() => {
-
-            setProductos();
+            const db = getFirestore();
+            const items = collection(db, 'items');
+            getDocs(items).then((snapshot) => {
+                const docs = snapshot.docs.map((doc) => ({
+                    id: doc.id, ...doc.data()
+                }))
+                setProds(docs);
+                setMac(docs.filter(elem => elem.type === 'mac'));
+                setIphone(docs.filter(elem => elem.type === 'phone'));
+                setWatch(docs.filter(elem => elem.type === 'watch'));
+            })
         }, 2000);
     }, []);
 
@@ -44,6 +43,7 @@ function App() {
                         <Route path='/' element={<ItemListContainer prods={prods} />} />
                         <Route path='/category/mac' element={<ItemListContainer prods={mac} />} />
                         <Route path='/category/iphone' element={<ItemListContainer prods={iphone} />} />
+                        <Route path='/category/watch' element={<ItemListContainer prods={watch} />} />
                         <Route path='/category/:type/:productoID' element={<ItemDetailContainer />} />
                         <Route path='/cart' element={<CartContainer />} />
                     </Routes>
@@ -51,6 +51,7 @@ function App() {
             </CartProvider>
 
             <header className="App-header">
+                {prods.length === 0 ? <Loading/> : ""}
             </header>
         </div>
 
