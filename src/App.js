@@ -8,6 +8,7 @@ import CartContainer from './container/CartContainer';
 import { getFirestore, collection, getDocs } from 'firebase/firestore'
 import { CartProvider } from './contexts/CartContext';
 import Loading from './components/Loading';
+import CheckoutContainer from './container/CheckoutContainer';
 
 
 function App() {
@@ -44,8 +45,9 @@ function App() {
                         <Route path='/category/mac' element={<ItemListContainer prods={mac} />} />
                         <Route path='/category/iphone' element={<ItemListContainer prods={iphone} />} />
                         <Route path='/category/watch' element={<ItemListContainer prods={watch} />} />
-                        <Route path='/category/:type/:productoID' element={<ItemDetailContainer />} />
+                        <Route path='/category/:type/:productID' element={<ItemDetailContainer />} />
                         <Route path='/cart' element={<CartContainer />} />
+                        <Route path='/checkout' element={<CheckoutContainer/>}/>
                     </Routes>
                 </BrowserRouter>
             </CartProvider>

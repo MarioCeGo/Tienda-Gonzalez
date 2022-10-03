@@ -1,60 +1,45 @@
 
 
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 
 const CartContext = React.createContext();
 
 const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
-    const [quantity, setQuantity] = useState(0);
+    const [qty, setQty] = useState(0)
     const [total, setTotal] = useState(0)
 
-    const addItem = ({ prod, lote }) => {
-        let aux = true;
-        if (cart.length === 0) {
-            setCart([...cart, { prod, lote }]);
-            setQuantity(lote)
-        } else {
-            cart.forEach((product) => {
-                if (product.prod.type.toUpperCase() === prod.type.toUpperCase() && product.prod.id === prod.id && aux) {
-                    product.lote += lote;
-                    aux = false;
-                }
-            })
-            if (aux) {
-                setCart([...cart, { prod, lote }]);
-            }
-            console.log(cart)
-        }
+    const addItem = (prod) => {
+        console.log(prod.price)
+        if(isInCart(prod.id)){
+            const aux = [...cart];
+            const prodFound = aux.find(elem => elem.id === prod.id);
+            prodFound.qty += prod.qty;
+            console.log(prodFound.price)
+            prodFound.price = (prodFound.price + prod.price);
+            setCart(aux);
+        }else{
+            setCart([...cart, prod])
+        }        
     }
-
-    const checkQuantity = () => {
+    
+    const totalQty = () =>{
         let aux = 0;
         cart.forEach((elem)=>{
-            aux += elem.lote;
+            aux += elem.qty
         })
-        setQuantity(aux);
-        // if (quantity) {
-        //     setQuantity(0);
-        // } else {
-        //     cart.forEach((elem) => {
-        //         setQuantity(quantity + elem.lote);
-        //     })
-        // }
-        // if (!quantity) {
-        //     cart.forEach((elem) => {
-        //         setQuantity(quantity + elem.lote);
-        //     })
-        // }
+        setQty(aux);
     }
 
     const removeItem = (id) => {
-        cart.splice(cart.indexOf(cart.find(elem => elem.prod.id === id)), 1);
+        cart.splice(cart.indexOf(cart.find(elem => elem.id === id)), 1);
         getTotal();
+        totalQty();
     }
     const isInCart = (id) => {
-        cart.find(elem => elem.prod.id === id ? true : false );
+        return cart.some(elem => elem.id === id)
     }
 
     const clearCart = () => {
@@ -63,12 +48,17 @@ const CartProvider = ({ children }) => {
     const getTotal = () => {
         let aux = 0;
         cart.forEach((elem) => {
-            aux += (elem.prod.price * elem.lote)
+            aux += (elem.price * elem.qty)
         })
         setTotal(aux);
     }
+
+    useEffect(()=>{
+        totalQty();
+    },[cart])
+
     return (
-        <CartContext.Provider value={{ cart, quantity, total, addItem, clearCart, setTotal, getTotal, removeItem, checkQuantity }}>
+        <CartContext.Provider value={{ cart, qty, total, addItem, clearCart, setTotal, getTotal, removeItem, totalQty }}>
             {children}
         </CartContext.Provider>
     )
