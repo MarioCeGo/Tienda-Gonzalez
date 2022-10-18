@@ -1,10 +1,10 @@
-import FormBuyer from "../components/FormBuyer"
+import FormBuyer from "../Components/FormBuyer"
 import { useState} from "react"
 import { useContext } from "react"
-import { CartContext } from "../contexts/CartContext"
-import Cart from "../components/Cart"
+import { CartContext } from "../Contexts/CartContext"
+import Cart from "../Components/Cart"
 import { getFirestore, collection, addDoc} from "firebase/firestore"
-import OrderDetail from "../components/OrderDetail"
+import OrderDetail from "../Components/OrderDetail"
 
 
 const CheckoutContainer = () => {

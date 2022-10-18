@@ -1,7 +1,6 @@
 import { useContext } from "react";
-import { useState } from "react"
 import { Link } from "react-router-dom"
-import { CartContext } from "../contexts/CartContext";
+import { CartContext } from "../Contexts/CartContext";
 
 const Cart = ({ prod, className }) => {
     const cartCTX = useContext(CartContext);
@@ -23,7 +22,6 @@ const Cart = ({ prod, className }) => {
             <div className="cart-product-box-btn">
                 <button value={prod.id} onClick={removeProdList}>Remove</button>
             </div>}
-            
         </div>
     )
 }

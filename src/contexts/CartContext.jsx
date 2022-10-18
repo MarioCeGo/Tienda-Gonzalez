@@ -12,12 +12,10 @@ const CartProvider = ({ children }) => {
     const [total, setTotal] = useState(0)
 
     const addItem = (prod) => {
-        console.log(prod.price)
         if(isInCart(prod.id)){
             const aux = [...cart];
             const prodFound = aux.find(elem => elem.id === prod.id);
             prodFound.qty += prod.qty;
-            console.log(prodFound.price)
             prodFound.price = (prodFound.price + prod.price);
             setCart(aux);
         }else{
