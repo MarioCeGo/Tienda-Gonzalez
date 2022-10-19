@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { useState } from "react"
 import { Link } from "react-router-dom";
-import { CartContext } from "../Contexts/CartContext";
+import { CartContext } from "../contexts/CartContext";
 import ItemCount from "./ItemCount"
 
 const ItemDetail = ({ prod, idItem }) => {

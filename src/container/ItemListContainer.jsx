@@ -1,4 +1,4 @@
-import ItemList from "../Components/ItemList"
+import ItemList from "../components/ItemList"
 
 const ItemListContainer = ({prods})=>{
     

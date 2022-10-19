@@ -1,7 +1,7 @@
-import ItemDetail from "../Components/ItemDetail"
+import ItemDetail from "../components/ItemDetail"
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import Loading from "../Components/Loading";
+import Loading from "../components/Loading";
 import { getFirestore, getDoc, doc } from 'firebase/firestore'
 
 const ItemDetailContainer = () => {

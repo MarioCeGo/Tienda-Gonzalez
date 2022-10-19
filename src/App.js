@@ -1,14 +1,14 @@
 import './App.css';
-import NavBar from './Components/NavBar';
+import NavBar from './components/NavBar';
 import { useEffect, useState } from 'react';
-import ItemListContainer from './Container/ItemListContainer';
-import ItemDetailContainer from './Container/ItemDetailContainer';
+import ItemListContainer from './container/ItemListContainer';
+import ItemDetailContainer from './container/ItemDetailContainer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import CartContainer from './Container/CartContainer';
+import CartContainer from './container/CartContainer';
 import { getFirestore, collection, getDocs } from 'firebase/firestore'
-import { CartProvider } from './Contexts/CartContext';
-import Loading from './Components/Loading';
-import CheckoutContainer from './Container/CheckoutContainer';
+import { CartProvider } from './contexts/CartContext';
+import Loading from './components/Loading';
+import CheckoutContainer from './container/CheckoutContainer';
 
 
 function App() {
